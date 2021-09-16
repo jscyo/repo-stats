@@ -6,7 +6,7 @@ on:
   workflow_dispatch: # Allow for running this manually.
 jobs:
   j1:
-    name: repostats-for-nice-project
+    name: repostats-for-supertokens-core
     runs-on: ubuntu-latest
     steps:
       - name: run-ghrs
@@ -17,6 +17,24 @@ jobs:
           # Remove the parameter when the stats repository
           # and the data repository are the same.
           repository: supertokens/supertokens-core
+          # Set a GitHub API token that can read the stats
+          # repository, and that can push to the data
+          # repository (which this workflow file lives in),
+          # to store data and the report files.
+          ghtoken: ${{ secrets.ghrs_github_api_token }}
+          databranch: main
+  j2:
+    name: repostats-for-supertokens-auth-react
+    runs-on: ubuntu-latest
+    steps:
+      - name: run-ghrs
+        uses: jgehrcke/github-repo-stats@v1.1.0
+        with:
+          # Define the stats repository (the repo to fetch
+          # stats for and to generate the report for).
+          # Remove the parameter when the stats repository
+          # and the data repository are the same.
+          repository: supertokens/supertokens-auth-react
           # Set a GitHub API token that can read the stats
           # repository, and that can push to the data
           # repository (which this workflow file lives in),
